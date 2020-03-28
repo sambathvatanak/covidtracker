@@ -1,4 +1,5 @@
 import 'package:covidtracker/screens/guide.dart';
+import 'package:covidtracker/screens/map.dart';
 import 'package:covidtracker/screens/total.dart';
 import 'package:covidtracker/services/total_corona.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
     //country(),
     totalCorona(),
     home(),
+    map(),
     guide(),
   ];
 
@@ -30,8 +32,9 @@ class _HomePageState extends State<HomePage> {
     return new Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white70,
-        fixedColor: Colors.green[400],
+//        backgroundColor: Colors.green[400],
+        fixedColor: Colors.red[400],
+        unselectedItemColor: Colors.indigo[900],
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
         iconSize: 26,
@@ -43,6 +46,11 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: new Icon(Icons.flag),
             title: new Text('Country'),
+            backgroundColor: Colors.red,
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.map),
+            title: new Text('Map'),
             backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(

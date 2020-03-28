@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:covidtracker/services/total_corona.dart';
 import 'package:intl/intl.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class totalCorona extends StatefulWidget {
   @override
@@ -13,11 +14,23 @@ class _totalCoronaState extends State<totalCorona> {
 
   TotalCorona coro = new TotalCorona();
   String text;
-
-  final formatter = new NumberFormat("###,###");
+  double result = 0;
 
   Future getData() async{
      await coro.getData();
+  }
+
+  findPercentage(String total, String data){
+    double totalcase = double.parse(total);
+    double datacase = double.parse(data);
+    result = (datacase * 100) / totalcase;
+    return result.toStringAsFixed(2);
+  }
+
+  findProgressPercentage(){
+    double total = result;
+    total = result / 100;
+    return total;
   }
 //
 
@@ -27,11 +40,10 @@ class _totalCoronaState extends State<totalCorona> {
         SizedBox(height: 91,),
         Container(
           margin: EdgeInsets.fromLTRB(26, 8, 26, 8),
-          height: 150,
-
+          height: 153,
           width: 400,
           child: Card(
-            color: Colors.red[200],
+            color: Colors.indigo[200],
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Column(
@@ -45,9 +57,9 @@ class _totalCoronaState extends State<totalCorona> {
                         height: 50,
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(width: 35,),
+                      SizedBox(width: 38,),
                       Text(
-                          'Corona Virus Cases',
+                        'Total Cases',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w800,
@@ -68,7 +80,7 @@ class _totalCoronaState extends State<totalCorona> {
                         ),
                       ),
                       Text(
-                       coro.cases ?? '',
+                        coro.cases ?? '',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -84,7 +96,7 @@ class _totalCoronaState extends State<totalCorona> {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(26, 8, 26, 8),
-          height: 150,
+          height: 153,
           width: 400,
           child: Card(
             color: Colors.deepOrangeAccent[100],
@@ -101,9 +113,9 @@ class _totalCoronaState extends State<totalCorona> {
                         height: 50,
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(width: 35,),
+                      SizedBox(width: 38,),
                       Text(
-                        'Corona Virus Deaths',
+                        'Total Deaths',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w800,
@@ -140,7 +152,7 @@ class _totalCoronaState extends State<totalCorona> {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(26, 8, 26, 8),
-          height: 150,
+          height: 153,
           width: 400,
           child: Card(
             color: Colors.green[200],
@@ -157,9 +169,9 @@ class _totalCoronaState extends State<totalCorona> {
                         height: 50,
                         fit: BoxFit.cover,
                       ),
-                      SizedBox(width: 35,),
+                      SizedBox(width: 38,),
                       Text(
-                        'Corona Virus Recovered',
+                        'Total Recovered',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w800,
@@ -209,16 +221,23 @@ Map data = {};
         backgroundColor: Colors.green[400],
         title: Text ('Global Information'),
       ),
-      body: Column(
-        children: <Widget>[
-          FutureBuilder(
-            future: getData(),
-            builder: (context, AsyncSnapshot snapshot) {
-                return _homeData();
-            }
-          ),
-        ],
-      )
+//      body: Container(
+//        decoration: BoxDecoration(
+//        gradient: LinearGradient(
+//          colors: [Colors.deepOrangeAccent, Colors.green],
+//          begin: Alignment.topLeft,
+//          end: Alignment.bottomRight
+//        )),
+        body: Column(
+          children: <Widget>[
+            FutureBuilder(
+              future: getData(),
+              builder: (context, AsyncSnapshot snapshot) {
+                  return _homeData();
+              }
+            ),
+          ],
+        ),
     );
   }
 }

@@ -6,7 +6,7 @@ class guide extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Widget imageSlider = new Container(
-      height: 260,
+      height: 300,
       child: Carousel(
         boxFit: BoxFit.fill,
         images: [
@@ -26,10 +26,6 @@ class guide extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        title: Text('Guide'),
-        backgroundColor: Colors.green[400],
-      ),
       body: Container(
         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
         child: Column(
@@ -42,6 +38,7 @@ class guide extends StatelessWidget {
                 imageSlider,
               ],
             ),
+            SizedBox(height: 12,),
             Container(
               margin: EdgeInsets.fromLTRB(20, 23, 20, 8),
               height: 112,
