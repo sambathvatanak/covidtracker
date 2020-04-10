@@ -1,6 +1,6 @@
 # covidtracker
 
-A new Flutter application.
+Tracking infected people around the world.
 
 ## Getting Started
 
